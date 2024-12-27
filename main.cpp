@@ -14,7 +14,7 @@
 #include <ESP8266WiFi.h>
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
-#include <Adafruit_BME680.h>
+#include <Adafruit_BME680.h> // change the i2c address in the definition of the Adafruit_BME680 object if necessary. Default is 0x77
 
 const char* ssid = SSID;
 const char* password = WIFIPASS;
