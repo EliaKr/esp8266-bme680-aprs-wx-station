@@ -134,7 +134,7 @@ String createAPRSMessage(Measurements measurements){
   message += " ";
   message += MESSAGE;
   message += " ";
-  message += "[Gas resistance: ";
+  message += " [Gas resistance: ";
   message += measurements.gasResistance;
   message += "kΩ]";
   message += " #";  // This represents the weather station icon in APRS
