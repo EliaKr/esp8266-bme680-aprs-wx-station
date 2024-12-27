@@ -77,7 +77,10 @@ void loop() {
   String message = createAPRSMessage(measurements);
   sendAPRSMessage(message);
 
-  delay(DELAY);
+  // comment out the correct line dependiong on whether you want to sleep or not
+  // delay(DELAY);
+  int deepSleepTime = DELAY * 1000000;
+  ESP.deepSleep(deepSleepTime); // sleep for DELAY seconds (useful for battery powered devices). Needs GPIO16(D0) connected to RST.
 }
 
 // returns the measurements from the BME680 sensor
