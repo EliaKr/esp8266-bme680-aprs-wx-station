@@ -1,4 +1,4 @@
-#define CALLSIGN "YOUR_CALLSIGN" // your callsign
+#define CALLSIGN "YOUR_CALLSIGN-13" // your callsign and SSID (usually -13)
 #define PASSCODE "YOUR_PASSCODE" // your APRS-IS passcode
 #define LAT "YOUR_LATITUDE" // formatted for APRS (you can use https://aprs.wiki/converter/ to convert your coordinates)
 #define LONG "YOUR_LONGITUDE" // formatted for APRS (you can use https://aprs.wiki/converter/ to convert your coordinates)
@@ -137,6 +137,7 @@ String createAPRSMessage(Measurements measurements){
   message += "[Gas resistance: ";
   message += measurements.gasResistance;
   message += "kΩ]";
+  message += " #";  // This represents the weather station icon in APRS
 
   return message;
 }
