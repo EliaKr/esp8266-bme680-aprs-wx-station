@@ -1,7 +1,7 @@
 #define CALLSIGN "YOUR_CALLSIGN" // your callsign
 #define PASSCODE "YOUR_PASSCODE" // your APRS-IS passcode
-#define LAT "YOUR_LATITUDE" // formatted for APRS (DDMM.MMN) (you can use https://aprs.wiki/converter/ to convert your coordinates)
-#define LONG "YOUR_LONGITUDE" // formatted for APRS (DDMM.MMN) (you can use https://aprs.wiki/converter/ to convert your coordinates)
+#define LAT "YOUR_LATITUDE" // formatted for APRS (you can use https://aprs.wiki/converter/ to convert your coordinates)
+#define LONG "YOUR_LONGITUDE" // formatted for APRS (you can use https://aprs.wiki/converter/ to convert your coordinates)
 #define ALTITUDE "YOUR_ALTITUDE" // altitude in meters. Intended for static weather reporting
 #define MESSAGE "YOUR_MESSAGE" // the message contained in the APRS packet
 
