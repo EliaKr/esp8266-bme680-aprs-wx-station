@@ -4,8 +4,8 @@
 #define LONG "YOUR_LONGITUDE" // formatted for APRS (you can use https://aprs.wiki/converter/ to convert your coordinates)
 #define MESSAGE "YOUR_MESSAGE" // the message contained in the APRS packet
 
-#define SSID "YOUR_SSID" // your WiFi SSID
-#define WIFIPASS "YOUR_WIFI_PASSWORD" // your WiFi password
+#define WIFI_SSID "YOUR_SSID" // your WiFi SSID
+#define WIFI_PASS "YOUR_WIFI_PASSWORD" // your WiFi password
 #define SERVER "rotate.aprs2.net" // APRS-IS server
 #define PORT 14580 // APRS-IS server port
 #define DELAY 300000 // delay between measurements in milliseconds
@@ -15,8 +15,8 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME680.h> // change the i2c address in the definition of the Adafruit_BME680 object if necessary. Default is 0x77
 
-const char* ssid = SSID;
-const char* password = WIFIPASS;
+const char* ssid = WIFI_SSID;
+const char* password = WIFI_PASS;
 
 struct Measurements {
   float temperature;
@@ -78,7 +78,7 @@ void loop() {
 
   // comment out the correct line dependiong on whether you want to sleep or not
   // delay(DELAY);
-  int deepSleepTime = DELAY * 1000000;
+  long deepSleepTime = DELAY * 1000;
   ESP.deepSleep(deepSleepTime); // sleep for DELAY seconds (useful for battery powered devices). Needs GPIO16(D0) connected to RST.
 }
 
