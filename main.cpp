@@ -66,9 +66,6 @@ void setup() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-
-  // APRS
-  // Connect to the APRS-IS server
 }
 
 void loop() {
