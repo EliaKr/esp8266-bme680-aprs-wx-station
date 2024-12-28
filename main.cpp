@@ -2,7 +2,7 @@
 #define PASSCODE "YOUR_PASSCODE" // your APRS-IS passcode
 #define LAT "YOUR_LATITUDE" // formatted for APRS (you can use https://aprs.wiki/converter/ to convert your coordinates)
 #define LONG "YOUR_LONGITUDE" // formatted for APRS (you can use https://aprs.wiki/converter/ to convert your coordinates)
-#define ALTITUDE "YOUR_ALTITUDE" // altitude in meters. Intended for static weather reporting
+#define ALTITUDE "YOUR_ALTITUDE" // altitude in feet. Intended for static weather reporting
 #define MESSAGE "YOUR_MESSAGE" // the message contained in the APRS packet
 
 #define SSID "YOUR_SSID" // your WiFi SSID
@@ -111,33 +111,43 @@ Measurements getMeasurements() {
   return measurements;
 }
 
-// sample message CALLSIGN>APRS,TCPIP*:3752.49N/12225.16W_t22.5Ch65%p1013.2hPa Weather station report.
 // formats the measurements and data to create the APRS message
 String createAPRSMessage(Measurements measurements){
   String message = CALLSIGN;
   message += ">APRS,TCPIP*:";
+  // might need to add utc time here
   message += LAT;
   message += "/";
   message += LONG;
   message += "_t";
-  message += measurements.temperature;
-  message += "C";
-  message += "h";
-  message += measurements.humidity;
-  message += "%";
-  message += "p";
-  message += measurements.pressure;
-  message += "hPa";
-  message += "a";            // Altitude prefix
+
+  float temperatureF = (measurements.temperature * 9.0 / 5.0) + 32.0;
+  char temperatureStr[4];
+  snprintf(temperatureStr, sizeof(temperatureStr), "%03d", (int)temperatureF);
+  message += temperatureStr; // temperature in Fahrenheit
+
+  message += "h"; // Humidity prefix
+  char humidityStr[3];
+  snprintf(humidityStr, sizeof(humidityStr), "%02d", (int)measurements.humidity);
+  message += humidityStr; // humidity value 2 digits
+
+  message += "b";            // Pressure prefix
+  char pressureStr[6];
+  snprintf(pressureStr, sizeof(pressureStr), "%05d", (int)(measurements.pressure * 10));
+  message += pressureStr; // Pressure value 5 digits
+
+  message += " {W}";  // This represents the weather station icon in APRS
+
+  message += " /A=";            // Altitude prefix
   message += ALTITUDE; // Altitude value
-  message += "m";            // Altitude unit (meters)
   message += " ";
   message += MESSAGE;
-  message += " ";
+
   message += " [Gas resistance: ";
-  message += measurements.gasResistance;
+  char gasResistanceStr[10];
+  snprintf(gasResistanceStr, sizeof(gasResistanceStr), "%.2f", measurements.gasResistance);
+  message += gasResistanceStr;
   message += "kΩ]";
-  message += " #";  // This represents the weather station icon in APRS
 
   return message;
 }
