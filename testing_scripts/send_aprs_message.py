@@ -28,12 +28,6 @@ def send_aprs_message(aprs_message):
     s.close()
 
 if __name__ == "__main__":
-    for i in range(1, 10):
-
-        temp = random.randint(34, 64)
-        humidity = random.randint(34, 74)
-        pressure = random.randint(10100, 10300)
-
         # Add your message here
         aprs_message = f"YOUR_MESSAGE"
         send_aprs_message(aprs_message)
