@@ -2,7 +2,6 @@
 #define PASSCODE "YOUR_PASSCODE" // your APRS-IS passcode
 #define LAT "YOUR_LATITUDE" // formatted for APRS (you can use https://aprs.wiki/converter/ to convert your coordinates)
 #define LONG "YOUR_LONGITUDE" // formatted for APRS (you can use https://aprs.wiki/converter/ to convert your coordinates)
-#define ALTITUDE "YOUR_ALTITUDE" // altitude in feet. Intended for static weather reporting
 #define MESSAGE "YOUR_MESSAGE" // the message contained in the APRS packet
 
 #define SSID "YOUR_SSID" // your WiFi SSID
@@ -114,12 +113,15 @@ Measurements getMeasurements() {
 // formats the measurements and data to create the APRS message
 String createAPRSMessage(Measurements measurements){
   String message = CALLSIGN;
+  
   message += ">APRS,TCPIP*:";
-  // might need to add utc time here
+  message += "@......z";
   message += LAT;
   message += "/";
   message += LONG;
-  message += "_t";
+  message += "_.../...g...";
+
+  message += "t"; // Temperature prefix
 
   float temperatureF = (measurements.temperature * 9.0 / 5.0) + 32.0;
   char temperatureStr[4];
@@ -131,15 +133,13 @@ String createAPRSMessage(Measurements measurements){
   snprintf(humidityStr, sizeof(humidityStr), "%02d", (int)measurements.humidity);
   message += humidityStr; // humidity value 2 digits
 
+  message += "r...p...P...";
+
   message += "b";            // Pressure prefix
   char pressureStr[6];
   snprintf(pressureStr, sizeof(pressureStr), "%05d", (int)(measurements.pressure * 10));
   message += pressureStr; // Pressure value 5 digits
 
-  message += " {W}";  // This represents the weather station icon in APRS
-
-  message += " /A=";            // Altitude prefix
-  message += ALTITUDE; // Altitude value
   message += " ";
   message += MESSAGE;
 
