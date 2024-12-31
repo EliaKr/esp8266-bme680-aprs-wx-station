@@ -22,3 +22,8 @@ A simple and lightweight APRS weather station using the BME680 sensor and ESP826
 
 ## Usage
 - Connect the ESP8266 to external power and the station will start monitoring
+
+## Troubleshooting
+- Connection to APRS-IS server failed: Try hardcoding the APRS-IS rotate.aprs2.net ip address in the server define field or change the dns settings.
+
+
